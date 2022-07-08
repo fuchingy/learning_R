@@ -1,0 +1,108 @@
+---
+title: "12 For Loop"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## For Loops
+
+A `for` loop is used for iterating over a sequence:
+
+```{r}
+for (x in 1:10) {
+  print(x)
+}
+```
+
+This is less like the `for` keyword in other programming languages, and works more like an iterator method as found in other object-orientated programming languages.
+
+With the `for` loop we can execute a set of statements, once for each item in a vector, array, list, etc..
+
+```{r}
+fruits <- list("apple", "banana", "cherry")
+
+for (x in fruits) {
+  print(x)
+}
+```
+
+```{r}
+dice <- c(1, 2, 3, 4, 5, 6)
+
+for (x in dice) {
+  print(x)
+}
+```
+
+The `for` loop does not require an indexing variable to set beforehand, like with `while` loops.
+
+## Break
+
+With the `break` statement, we can stop the loop before it has looped through all the items:
+
+```{r}
+fruits <- list("apple", "banana", "cherry")
+
+for (x in fruits) {
+  if (x == "cherry") {
+    break
+  }
+  print(x)
+}
+```
+
+The loop will stop at "cherry" because we have chosen to finish the loop by using the `break` statement when `x` is equal to "cherry" (`x == "cherry"`).
+
+## Next
+
+With the `next` statement, we can skip an iteration without terminating the loop:
+
+```{r}
+fruits <- list("apple", "banana", "cherry")
+
+for (x in fruits) {
+  if (x == "banana") {
+    next
+  }
+  print(x)
+}
+```
+
+When the loop passes "banana", it will skip it and continue to loop.
+
+## Yahtzee!
+### If .. Else Combined with a For Loop
+
+To demonstrate a practical example, let us say we play a game of Yahtzee!
+
+```{r}
+dice <- 1:6
+
+for(x in dice) {
+  if (x == 6) {
+    print(paste("The dice number is", x, "Yahtzee!"))
+  } else {
+    print(paste("The dice number is", x, "Not Yahtzee"))
+  }
+}
+```
+
+If the loop reaches the values ranging from 1 to 5, it prints "No Yahtzee" and its number. When it reaches the value 6, it prints "Yahtzee!" and its number.
+
+## Nested Loops
+
+You can also have a loop inside of a loop:
+
+```{r}
+adj <- list("red", "big", "tasty")
+
+fruits <- list("apple", "banana", "cherry")
+  for (x in adj) {
+    for (y in fruits) {
+      print(paste(x, y))
+  }
+}
+```

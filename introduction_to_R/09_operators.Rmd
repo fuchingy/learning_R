@@ -1,0 +1,83 @@
+---
+title: "09 Operators"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Operators
+
+Operators are used to perform operations on variables and values.
+
+In the example below, we use the `+` operator to add together two values:
+
+```{r}
+10 + 5
+```
+
+R divides the operators in the following groups:
+
+- Arithmetic operators
+- Assignment operators
+- Comparison operators
+- Logical operators
+- Miscellaneous operators
+
+## R Arithmetic Operators
+
+Arithmetic operators are used with numeric values to perform common mathematical operations:
+
+```{r, echo=FALSE}
+library(knitr)
+data <- data.frame(Operator=c('+', '-', '*', '/', '^', '%%', '%/%'),
+                   Name=c('Addition', 'Subtraction', 'Multiplication', 'Division', 'Exponent', 'Module(Remainder from division)', 'Integer Division'),
+                   Example=c('x + y', 'x - y', 'x * y', 'x / y', 'x ^ y', 'x %% y', 'x%/%y'))
+kable(data)
+```
+
+## R Assignment Operators
+
+Assignment operators are used to assign values to variables:
+
+Note: `<<-` is a global assigner. You will learn more about this in the Global Variable chapter.
+It is also possible to turn the direction of the assignment operator.
+x <- 3 is equal to 3 -> x
+
+```{r}
+my_var <- 3
+my_var <<- 3
+3 -> my_var
+3 ->> my_var
+my_var # print my_var
+```
+
+## R Logical Operators
+
+Logical operators are used to combine conditional statements:
+
+```{r, echo=FALSE}
+data <- data.frame(Operator=c('&', '&&', '|', '||', '!'),
+                   Description=c('Element-wise Logical AND operator. It returns TRUE if both elements are TRUE',
+                                 'Logical AND operator - Returns TRUE if both statements are TRUE',
+                                 'Elementwise- Logical OR operator. It returns TRUE if one of the statement is TRUE',
+                                 'Logical OR operator. It returns TRUE if one of the statement is TRUE.',
+                                 'Logical NOT - returns FALSE if statement is TRUE'))
+kable(data)
+```
+
+## R Miscellaneous Operators
+
+Miscellaneous operators are used to manipulate data:
+
+```{r, echo=FALSE}
+data <- data.frame(Operator=c(':', '%in%', '%*%'),
+                   Description=c('Creates a series of numbers in a sequence',
+                                 'Find out if an element belongs to a vector',
+                                 'Matrix Multiplication'),
+                   Example=c('x <- 1:10',
+                             'x %in% y',
+                             'x <- Matrix1 %*% Matrix2'))
+kable(data)
+```

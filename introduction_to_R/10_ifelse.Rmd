@@ -1,0 +1,89 @@
+---
+title: "10 If-Else"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Conditions and If Statements
+
+R supports the usual logical conditions from mathematics:
+
+```{r, echo=FALSE}
+library(knitr)
+data <- data.frame(Operator=c('==', '!=', '>', '<', '>=', '<='),
+                   Name=c('Equal', 'Not equal', 'Greater than', 'Less than', 'Greater than or equal to', 'Less than or equal to'),
+                   Example=c('x == y', 'x != y', 'x > y', 'x < y', 'x >= y', 'x <= y'))
+kable(data)
+```
+
+These conditions can be used in several ways, most commonly in "if statements" and loops.
+
+An "if statement" is written with the `if` keyword, and it is used to specify a block of code to be executed if a condition is `TRUE`:
+
+
+```{r}
+a <- 33
+b <- 200
+
+if (b > a) {
+  print("b is greater than a")
+}
+```
+
+In this example we use two variables, `a` and `b`, which are used as a part of the if statement to test whether `b` is greater than `a`. As `a` is `33`, and `b` is `200`, we know that 200 is greater than 33, and so we print to screen that "b is greater than a".
+
+R uses curly brackets { } to define the scope in the code.
+
+## Else If
+
+The `else if` keyword is R's way of saying "if the previous conditions were not true, then try this condition":
+
+```{r}
+a <- 33
+b <- 33
+
+if (b > a) {
+  print("b is greater than a")
+} else if (a == b) {
+  print ("a and b are equal")
+}
+```
+
+In this example `a` is equal to `b`, so the first condition is not true, but the `else if` condition is true, so we print to screen that "a and b are equal".
+
+You can use as many `else if` statements as you want in R.
+
+## If Else
+
+The `else` keyword catches anything which isn't caught by the preceding conditions:
+
+```{r}
+a <- 200
+b <- 33
+
+if (b > a) {
+  print("b is greater than a")
+} else if (a == b) {
+  print("a and b are equal")
+} else {
+  print("a is greater than b")
+}
+```
+
+In this example, `a` is greater than `b`, so the first condition is not true, also the `else if` condition is not true, so we go to the `else` condition and print to screen that "a is greater than b".
+
+You can also use `else` without `else if`:
+
+```{r}
+a <- 200
+b <- 33
+
+if (b > a) {
+  print("b is greater than a")
+} else {
+  print("b is not greater than a")
+}
+```

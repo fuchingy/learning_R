@@ -1,0 +1,30 @@
+---
+title: "01 Syntax"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Syntax
+
+To output text in R, use single or double quotes:
+
+```{r}
+"Hello World"
+```
+
+To output numbers, just type the number (without quotes):
+
+```{r}
+5
+10
+25
+```
+
+To do simple calculations, add numbers together:
+
+```{r}
+5 + 5
+```
