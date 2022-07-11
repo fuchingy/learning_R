@@ -4,6 +4,8 @@ This is a repo for R training purpose. It contains examples in the below directo
 
 * introduction_to_R
   * R examples from https://www.w3schools.com/r/
+* applications
+  * Examples for various applications, such as autocorrelation, PCA, and so on.
 
 # How to use?
 
