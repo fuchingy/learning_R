@@ -1,0 +1,34 @@
+---
+title: "Autocorrelation case"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## About autocorrelation
+
+Autocorrelation is the correlation of a signal with a delayed copy of itself as a function of delay. Informally, it is the similarity between observations as a function of the time lag between them.
+
+The analysis of autocorrelation is a mathematical tool for finding repeating patterns, such as the presence of a periodic signal obscured by noise, or identifying the missing fundamental frequency in a signal implied by its harmonic frequencies. It is often used in signal processing for analyzing functions or series of values, such as time domain signals.
+
+## Example
+
+To see how autocorrelation helps detecting the repeated patterns at practice, we create the below time-series data. We can see a obvious pattern `c(0, 0.5, 1, 0, 2, 0, 3)` repeating 10 times.
+
+```{r}
+library(ggplot2)
+data <- data.frame(v=rep(c(0, 0.5, 1, 0, 2, 0, 3), times=10))
+data$sn <- as.numeric(row.names(data))
+ggplot(data, aes(x=sn, y=v)) + geom_line() + geom_point()
+```
+
+By applying `acf()`, we can see it calculates the correlation rate for different lags. Among them, the lag-7 has the highest correlation rate (0.900). It shows that `acf()` can indeed successfully detect the repeated pattern.
+
+```{r}
+acf(data$v, lag=10, pl=TRUE)
+```
+```{r}
+acf(data$v, lag=10, pl=FALSE)
+```
