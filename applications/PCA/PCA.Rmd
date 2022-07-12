@@ -87,3 +87,21 @@ ggplot(data.pca.ind, aes(x=Dim.1, y=Dim.2)) +
   geom_segment(data=data.pca.quanti.sup, aes(x = 0, y = 0, xend = Dim.1, yend = Dim.2, colour = "blue"), arrow = arrow(length = unit(0.1, "inches")))
 ```
 
+Below plots the variance explained by PCs.
+
+```{r}
+library("factoextra")
+# Plot the PCA variance
+fviz_eig(data.pca, addlabels=TRUE)
+```
+We can also use `cor()` and `corrplot()` to visualize the correlation of 2 variables.
+
+```{r}
+# Ref: http://www.sthda.com/english/wiki/wiki.php?id_contents=7851
+library("corrplot")
+
+cor.mat <- round(cor(data[1:10]),2)
+corrplot(cor.mat, type="upper", order="hclust",
+         tl.col="black", tl.srt=45)
+```
+
