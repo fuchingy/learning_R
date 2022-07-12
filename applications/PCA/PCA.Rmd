@@ -1,0 +1,89 @@
+---
+title: "Autocorrelation case"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## About PCA
+
+The principal components of a collection of points in a real coordinate space are a sequence of p unit vectors, where the i-th vector is the direction of a line that best fits the data while being orthogonal to the first i-1 vectors. Here, a best-fitting line is defined as one that minimizes the average squared distance from the points to the line. These directions constitute an orthonormal basis in which different individual dimensions of the data are linearly uncorrelated. Principal component analysis (PCA) is the process of computing the principal components and using them to perform a change of basis on the data, sometimes using only the first few principal components and ignoring the rest.
+
+## decathlon example
+
+I basically follow http://factominer.free.fr/factomethods/principal-components-analysis.html for the PCA usage.
+Below shows the decathlon data set.
+
+```{r}
+library(FactoMineR)
+data(decathlon)
+data <- decathlon
+data
+```
+
+Let's apply PCA to this data set. Column-11 (Rank) and column-12 (Points) are treated as quantitative supplementary variables. Column-13 (Competition) are treated as categorical supplementary variable.
+
+The `PCA()` function shows the results.
+
+```{r}
+# Apply PCA and visualize
+#  Input:
+#    quanti.sup: quantitative supplementary variables
+#    quali.sup: categorical supplementary variables
+#  Output:
+#    var$coord: For Pcounter
+#    ind$coord: For Workload
+#    quanti.sup$coord: For supplementary variables
+data.pca <- PCA(data, scale.unit = TRUE, quanti.sup=c(11, 12), quali.sup=c(13))
+```
+
+For better plot customization, we can extract the data from the `PCA()` results.
+
+Below is the PCs of the individual.
+
+```{r}
+# Extract workload PCs
+data.pca.ind <- data.frame(data.pca$ind$coord)
+data.pca.ind
+```
+
+Below is the eigen vectors.
+
+```{r}
+# Extract Pcounter eigen vectors
+data.pca.var <- data.frame(data.pca$var$coord)
+data.pca.var
+```
+
+Below is the quantitative supplementary vectors.
+
+```{r}
+# Extract quantitative supplementary vectors
+data.pca.quanti.sup <- data.frame(data.pca$quanti.sup$coord)
+data.pca.quanti.sup
+```
+
+Below is the categorical supplementary vectors.
+
+```{r}
+# Extract categorical supplementary vectors
+data.pca.quali.sup <- data.frame(data.pca$quali.sup$coord)
+data.pca.quali.sup
+```
+
+Once we retrive all the data, we can plot them using ggplot.
+
+```{r}
+# Plot
+library(ggplot2)
+library(ggrepel)
+ggplot(data.pca.ind, aes(x=Dim.1, y=Dim.2)) +
+  geom_point() + geom_text_repel(aes(label=rownames(data.pca.ind)), size=3) +
+  geom_point(data=data.pca.quali.sup, aes(x=Dim.1, y=Dim.2), color="red") + geom_text_repel(data=data.pca.quali.sup, aes(label=rownames(data.pca.quali.sup)), color="red", size=3) +
+  geom_segment(data=data.pca.var, aes(x = 0, y = 0, xend = Dim.1, yend = Dim.2, colour = "segment"), arrow = arrow(length = unit(0.1, "inches"))) +
+  geom_text(data=data.pca.var, aes(label=rownames(data.pca.var)), size=2) +
+  geom_segment(data=data.pca.quanti.sup, aes(x = 0, y = 0, xend = Dim.1, yend = Dim.2, colour = "blue"), arrow = arrow(length = unit(0.1, "inches")))
+```
+
