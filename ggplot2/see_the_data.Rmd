@@ -1,0 +1,43 @@
+---
+title: "See the data"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## See the data
+
+This is an interactive course for the instructor to discuss and modify the code with the trainee interactively to explore the data.
+
+### Dataset
+
+We use the iris dataset to see how we can use ggplot to understand it.
+
+- Sepal: 萼片
+- Petal: 花瓣
+
+```{r}
+library(ggplot2)
+library(datasets)
+data(iris)
+iris
+```
+
+### Question: How to see the data completely?
+
+In the below plot, only `Sepal.Length` and `Sepal.Width` are visualized.
+
+Some data attributes are not seen:
+
+- `Petal.Length`
+- `Petal.Width`
+- `Species`
+
+Also, the points are overlapped. Although alpha is used to reflect the density, it's not easy to tell how many points (from all species) are overlapped.
+
+```{r}
+ggplot(iris) + geom_point(aes(x = Sepal.Length, y = Sepal.Width), alpha=0.3)
+```
+
