@@ -1,0 +1,38 @@
+---
+title: "Calculation by group"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## How to calculate the sum of groups by value range?
+
+```{r}
+d <- data.frame(interval=c(10000, 10000, 10000, 10000, 10000, 10000, 20000, 20000, 20000, 20000, 20000, 20000), count=c(51, 100, 55, 160, 110, 120, 210, 51, 100, 222, 9, 20))
+d
+```
+```{r}
+frequency_groups <- c(0, 50, 150, 200, 1000, 5000)
+frequency_groups
+```
+
+```{r}
+library(dplyr)
+tmp1 <- d %>% mutate(range = cut(count, frequency_groups))
+tmp1
+```
+
+```{r}
+tmp2 <- tmp1 %>% group_by(interval, range) %>% summarize(count = sum(count), .groups = 'drop')
+tmp2
+```
+
+```{r}
+d_regroup <- d %>%
+  mutate(range = cut(count, frequency_groups)) %>%
+  group_by(interval, range) %>%
+  summarize(count = sum(count), .groups = 'drop')
+d_regroup
+```
