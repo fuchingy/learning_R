@@ -1,0 +1,40 @@
+---
+title: "Wide and Long"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Conversion between wide and long
+
+* Reference: http://www.cookbook-r.com/Manipulating_data/Converting_data_between_wide_and_long_format/
+
+The example wide data.
+
+```{r}
+wide_data <- data.frame(name=c("A","B","C","D","E"),
+                        attrb1=c(5, 4, 1, 2, 3),
+                        attrb2=c(1, 2, 3, 4, 5),
+                        attrb3=c(1, 8, 2, 5, 2),
+                        attrb4=c(4, 8, 6, 2, 9),
+                        attrb5=c(6, 7, 9, 1, 3))
+wide_data
+```
+
+Convert wide data to long data.
+
+```{r}
+library(tidyr)
+# gather(data, key="key", value="value", ..., na.rm=FALSE, convert=FALSE, factor_key=FALSE)
+long_data <- gather(wide_data, key, value, c("attrb2", "attrb3", "attrb4", "attrb5"), factor_key=TRUE)
+long_data
+```
+Convert long data back to wide data.
+
+```{r}
+# spread(data, key, value, fill = NA, convert = FALSE, drop = TRUE, sep = NULL)
+tmp <- spread(long_data, key, value)
+tmp
+```
